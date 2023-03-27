@@ -13,16 +13,16 @@ public class Library extends Building {
   
     public void addTitle(String title) {
       // check if the book title is already in the library
-      if (this.collection.containsKey(title)) {
-        throw new RuntimeException("Error! " + title + " is already in the collection of " + this.name + ".");
+      if (containsTitle(title) == true) {
+        throw new RuntimeException("Error! Cannot add " + title + " because it is already in the collection of " + this.name + ".");
       }
       this.collection.put(title, true);
       System.out.println(title + " has just moved into the collection of " + this.name + ".");
     }
 
     public String removeTitle(String title) {
-      if (!this.collection.containsKey(title)) {
-        throw new RuntimeException("Error! " + title + " is not in the collection of " + this.name + ".");
+      if (containsTitle(title) == false) {
+        throw new RuntimeException("Error! Cannot remove " + title + " because it is not in the collection of " + this.name + ".");
       }
       // return the title that we removed
       this.collection.remove(title);
@@ -31,22 +31,22 @@ public class Library extends Building {
     } 
     
     public void checkOut(String title) {
-      if (!this.collection.containsKey(title)) {
-        throw new RuntimeException("Error! " + title + " is not in the collection of " + this.name + ".");
+      if (containsTitle(title) == false) {
+        throw new RuntimeException("Error! Cannot check out " + title + " because it is not in the collection of " + this.name + ".");
       }
-      if (this.collection.get(title) == false) {
-        throw new RuntimeException("Error! " + title + " is already checked out.");
+      if (isAvailable(title) == false) {
+        throw new RuntimeException("Error! Cannot check out " + title + " because it is already checked out from " + this.name + ".");
       }
       collection.replace(title, true, false);
       System.out.println(title + " is successfully checked out from " + this.name + ".");
     }
     
     public void returnBook(String title) {
-      if (!this.collection.containsKey(title)) {
-        throw new RuntimeException("Error! " + title + " is not in the collection of " + this.name + ".");
+      if (containsTitle(title) == false) {
+        throw new RuntimeException("Error! Cannot return " + title + " because it is not in the collection of " + this.name + ".");
       }
-      if (this.collection.get(title) == true) {
-        throw new RuntimeException("Error! " + title + " cannot be returned to " + this.name + " because it was not borrowed from this library.");
+      if (isAvailable(title) == true) {
+        throw new RuntimeException("Error! Cannot return " + title + " because it was not borrowed from " + this.name + ".");
       }
       collection.replace(title, false, true);
       System.out.println(title + " is successfully return to " + this.name + ".");
@@ -74,24 +74,19 @@ public class Library extends Building {
     
     public void printCollection() {
       // prints out the entire collection in an easy-to-read way (including checkout status)
-      
+
     }
 
     public static void main(String[] args) {
       Library neilson = new Library("Neilson", "some street", 4);
       neilson.addTitle("Bird Book");
-      try {
-        neilson.addTitle("Bird Book");
-      }
-      catch (Exception e) {
-        System.out.println("Error! This book is already in the collection of " + neilson.getName() + "!");
-      }
       //neilson.removeTitle("Bird Book");
       //neilson.removeTitle("Bird Book");
       neilson.checkOut("Bird Book");
+      neilson.removeTitle("Bird Book");
       //neilson.checkOut("Bird Book");
-      neilson.returnBook("Bird Book");
-      neilson.returnBook("Bird Book");
+      //neilson.returnBook("Bird Book");
+      //neilson.returnBook("Bird Book");
       //neilson.checkOut("AAA");
       //neilson.returnBook("AAA");
     }
