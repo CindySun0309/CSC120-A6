@@ -74,7 +74,9 @@ public class Library extends Building {
     
     public void printCollection() {
       // prints out the entire collection in an easy-to-read way (including checkout status)
-
+      for (String title : collection.keySet()) {
+        System.out.println("Name: " + title + ", Available Status: " + isAvailable(title));
+      }
     }
 
     public static void main(String[] args) {
@@ -83,11 +85,14 @@ public class Library extends Building {
       //neilson.removeTitle("Bird Book");
       //neilson.removeTitle("Bird Book");
       neilson.checkOut("Bird Book");
-      neilson.removeTitle("Bird Book");
+      //neilson.removeTitle("Bird Book");
       //neilson.checkOut("Bird Book");
       //neilson.returnBook("Bird Book");
       //neilson.returnBook("Bird Book");
       //neilson.checkOut("AAA");
       //neilson.returnBook("AAA");
+      neilson.addTitle("Something");
+      neilson.addTitle("Another Book");
+      neilson.printCollection();
     }
   }
