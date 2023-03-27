@@ -26,7 +26,7 @@ public class House extends Building {
     // check if this.residents contains name
     if (this.residents.contains(name)) {
       //   if so: throw and exception
-      throw new RuntimeException(name + " is already a resident of " + this.name);
+      throw new RuntimeException("Error! " + name + " is already a resident of " + this.name);
     }
     // if we're good to go, add to roster
     this.residents.add(name);
@@ -37,7 +37,7 @@ public class House extends Building {
     // check if this.residents contains name
     if (!this.residents.contains(name)) {
       // if the person is not in the house : throw and exception
-      throw new RuntimeException("Cannot remove " + name + " because " + name + " is not a resident of " + this.name);
+      throw new RuntimeException("Error! Cannot remove " + name + " because " + name + " is not a resident of " + this.name);
     }
     // if we're good to go, delete from roster
     this.residents.remove(name);
@@ -83,7 +83,7 @@ public class House extends Building {
     //morrow.moveOut("Cindy");
     morrow.moveIn("Cindy");
     System.out.println(morrow);
-    
+
     House king = new House("King", "The Quad", 3, true);
     System.out.println(king);
   }
