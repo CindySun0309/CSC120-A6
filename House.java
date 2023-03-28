@@ -1,11 +1,24 @@
 import java.util.ArrayList;
 
-/* This is a stub for the House class */
+/**
+ * This class extends from the Building parent class
+ * and construct a House
+ */
 public class House extends Building {
 
+  /** A list of residents' names */
   private ArrayList<String> residents;
+
+  /** A boolean to indicate whether or not the house has a dining room */
   private boolean hasDiningRoom;
 
+  /**
+   * Constructs a house
+   * @param name the name of the house
+   * @param address the address of the house
+   * @param nFloors the number of floors of the house
+   * @param hasDiningRoom whether or not the house has a dining room
+   */
   public House(String name, String address, int nFloors, boolean hasDiningRoom) {
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
@@ -22,10 +35,11 @@ public class House extends Building {
     return this.residents.size();
   }
 
+  /** Method to move a student into the house */
   public void moveIn(String name) {
     // check if this.residents contains name
     if (this.residents.contains(name)) {
-      //   if so: throw and exception
+      // if so: throw and exception
       throw new RuntimeException("Error! " + name + " is already a resident of " + this.name);
     }
     // if we're good to go, add to roster
@@ -33,6 +47,7 @@ public class House extends Building {
     System.out.println(name + " has just moved into " + this.name + "! Go say hello :-)");
   }
 
+  /** Method to move out a student from the house */
   public String moveOut(String name) { 
     // check if this.residents contains name
     if (!this.residents.contains(name)) {
@@ -46,7 +61,13 @@ public class House extends Building {
     return name;
   }
 
+  /** 
+   * Boolean method to check if the student is a resident of the house
+   * @param person The name of the student
+   * @return boolean if the student is a resident of the house
+  */
   public boolean isResident(String person) {
+    // check if the student is already a resident
     if (this.residents.contains(person)) {
       System.out.println(person + " is a resident of " + this.name + ".");
       return true;
@@ -57,6 +78,10 @@ public class House extends Building {
     }
   }
 
+  /**
+   * Method to connect every information of a house into a string
+   * @return the result description of the house
+   */
   public String toString() {
     String description = super.toString();
     description += " There are currently " + this.nResidents() + " people living in this house.";
